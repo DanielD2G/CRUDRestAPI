@@ -6,3 +6,6 @@
 .idea/inspectionProfiles/Project_Default.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/BasicRestAPI.iml
+src/__pycache__/user.cpython-310.pyc
+*.pyc
+*.pyc

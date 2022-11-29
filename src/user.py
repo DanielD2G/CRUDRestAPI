@@ -1,7 +1,9 @@
 from flask import jsonify
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
+
+from blocklist import blocklist
 from models import UserModel
 from schemas import PlainUserSchema, UserUpdateSchema, LoginUserSchema, UserSchema
 from db import db
@@ -86,7 +88,6 @@ class Users(MethodView):
         return UserModel.query.all()
 
 
-
 @blp.route("/login")
 class UserLogin(MethodView):
     @blp.arguments(LoginUserSchema)
@@ -98,3 +99,12 @@ class UserLogin(MethodView):
             return {"access_token": access_token}
 
         abort(401, message="Invalid Credentials")
+
+
+@blp.route("/logout")
+class UserLogout(MethodView):
+    @jwt_required()
+    def post(selfself):
+        jti = get_jwt()["jti"]
+        blocklist.append(jti)
+        return {"message":"Logged out"}
