@@ -5,6 +5,3 @@ To access the documentation on how to use the API, please visit https://crudbasi
 
     flask run
 
-# REST API
-
-The REST API to the example app is described in https://crudbasic.readme.io/reference/getting-started-with-your-api
